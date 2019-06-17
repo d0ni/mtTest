@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { Meteor } from "meteor/meteor";
+import { render } from "react-dom";
+import { renderRoutes } from "./router";
+
 import App from "./app";
 
-// if (Meteor.isClient) {
-//   Meteor.startup(function() {
-//     ReactDOM.render(<App />, document.getElementById("root"));
-//   });
-// }
+Meteor.startup(() => {
+  render(renderRoutes(), document.getElementById("app"));
+});

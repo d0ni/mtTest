@@ -1,14 +1,16 @@
 import React from "react";
-import { mount } from "react-mounter";
-import { FlowRouter } from "meteor/kadira:flow-router";
 
-import { MainLayuot } from "./layouts/MainLayout";
+import { Router, Route, Switch } from "react-router";
+
+// route components
 import App from "./app";
 
-FlowRouter.route("/", {
-  action() {
-    mount(MainLayuot, {
-      content: <App />
-    });
-  }
-});
+const browserHistory = require("history").createBrowserHistory();
+
+export const renderRoutes = () => (
+  <Router history={browserHistory}>
+    <Switch>
+      <Route exact path="/" component={App} />
+    </Switch>
+  </Router>
+);
