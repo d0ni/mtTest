@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import { Resolutions } from "../db";
 import { Mongo } from "meteor/mongo";
-
-const Resolutions = new Mongo.Collection("resolution");
 
 export default class App extends Component {
   addResolution(event) {
@@ -14,7 +13,7 @@ export default class App extends Component {
       createdAt: new Date()
     });
 
-    console.log(text);
+    this.refs.resolution.value = "";
   }
 
   render() {

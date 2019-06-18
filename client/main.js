@@ -1,8 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { render } from "react-dom";
 import { renderRoutes } from "./router";
-
-import App from "./app";
+import { Resolutions } from "../db";
 
 Meteor.startup(() => {
   render(renderRoutes(), document.getElementById("app"));
