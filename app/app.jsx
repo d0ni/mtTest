@@ -49,6 +49,7 @@ export default class App extends TrackerReact(React.Component) {
             );
           })}
         </ul>
+        <p>{Meteor.userId()}</p>
       </div>
     );
   }

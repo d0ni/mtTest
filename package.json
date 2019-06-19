@@ -5,17 +5,19 @@
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "build": "node-gyp rebuild",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
+    "bcrypt": "^0.8.7",
     "history": "^4.9.0",
     "meteor-node-stubs": "^0.4.1",
+    "node-gyp": "^5.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-mounter": "^1.2.0",
-    "react-router": "^5.0.1",
-    "bcrypt": "^0.8.7"
+    "react-router": "^5.0.1"
   },
   "meteor": {
     "mainModule": {
