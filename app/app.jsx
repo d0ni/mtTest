@@ -4,6 +4,7 @@ import { Mongo } from "meteor/mongo";
 
 import ResolutionForm from "./resolutionForm";
 import ResolutionSingle from "./resolutionSingle";
+import AccountsUI from "./accauntsUI";
 
 Resolutions = new Mongo.Collection("resolutions");
 
@@ -36,6 +37,7 @@ export default class App extends TrackerReact(React.Component) {
           <nav>
             <a href="/"> Resolutions </a>
             <a href="/about"> About </a>
+            <AccountsUI />
           </nav>
         </header>
         <h1> My Resolutions </h1>
