@@ -22,6 +22,18 @@ Meteor.methods({
   },
   deleteResolution(id) {
     Resolutions.remove(id);
+  },
+  createUser(name, pwd) {
+    Resolutions.users.createUser({
+      user: name,
+      pwd: pwd,
+      roles: []
+    });
+
+    // Meteor.users.createUser({
+    //   username: name,
+    //   password: pwd
+    // });
   }
 });
 

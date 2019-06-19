@@ -37,8 +37,8 @@ export default class App extends TrackerReact(React.Component) {
           <nav>
             <a href="/"> Resolutions </a>
             <a href="/about"> About </a>
-            {/* <AccountsUI /> */}
           </nav>
+          <AccountsUI />
         </header>
         <h1> My Resolutions </h1>
         <ResolutionForm />
