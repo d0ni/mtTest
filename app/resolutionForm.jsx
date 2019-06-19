@@ -1,12 +1,18 @@
 import React from "react";
 
 export default class ResolutionForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.resolution = React.createRef();
+  }
+
   addResolution(event) {
     event.preventDefault();
-    var text = this.refs.resolution.value.trim();
 
-    Meteor.call("addResolution", text, () => {
-      this.refs.resolution.value = "";
+    const ref = this.resolution.current;
+
+    Meteor.call("addResolution", ref.value.trim(), () => {
+      ref.value = "";
     });
   }
 
@@ -15,7 +21,7 @@ export default class ResolutionForm extends React.Component {
       <form className="new-resolution" onSubmit={this.addResolution.bind(this)}>
         <input
           type="text"
-          ref="resolution"
+          ref={this.resolution}
           placeholder="Finish React Meteor Series"
         />
       </form>
