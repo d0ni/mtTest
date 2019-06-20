@@ -4,16 +4,16 @@ import { Mongo } from "meteor/mongo";
 
 import ResolutionForm from "./resolutionForm";
 import ResolutionSingle from "./resolutionSingle";
-import AccountsUI from "./accauntsUI";
+import Header from "./header";
 
 Resolutions = new Mongo.Collection("resolutions");
 
-export default class App extends TrackerReact(React.Component) {
+export default class ResolutionWrapper extends TrackerReact(React.Component) {
   constructor() {
     super();
     this.state = {
       subscription: {
-        resolutions: Meteor.subscribe("allResolutions")
+        resolutions: Meteor.subscribe("userResolutions")
       }
     };
   }
@@ -32,15 +32,8 @@ export default class App extends TrackerReact(React.Component) {
 
     return (
       <div>
-        <header>
-          <h2>My Resolutions</h2>
-          <nav>
-            <a href="/"> Resolutions </a>
-            <a href="/about"> About </a>
-          </nav>
-          <AccountsUI />
-        </header>
-        <h1> My Resolutions </h1>
+        <Header />
+        <h1> My Resolutions - {Session.get("test")} </h1>
         <ResolutionForm />
         <ul>
           {this.resolutions().map(resolution => {
@@ -49,7 +42,6 @@ export default class App extends TrackerReact(React.Component) {
             );
           })}
         </ul>
-        <p>{Meteor.userId()}</p>
       </div>
     );
   }

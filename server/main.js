@@ -1,5 +1,4 @@
 import { Meteor } from "meteor/meteor";
-// import { Resolutions } from "../app/app";
 
 Resolutions = new Mongo.Collection("resolutions");
 
@@ -7,24 +6,41 @@ Meteor.startup(() => {
   // code to run on server at startup
 });
 
+Meteor.publish("allResolutions", function() {
+  return Resolutions.find({});
+});
+
+Meteor.publish("userResolutions", function() {
+  return Resolutions.find({ user: this.userId });
+});
+
 Meteor.methods({
   addResolution(resolution) {
+    if (!Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
     Resolutions.insert({
       text: resolution,
       complete: false,
-      createdAt: new Date()
+      createdAt: new Date(),
+      user: Meteor.userId()
     });
   },
-  toggleResolution(id, status) {
-    Resolutions.update(id, {
-      $set: { complete: !status }
-    });
-  },
-  deleteResolution(id) {
-    Resolutions.remove(id);
-  }
-});
+  toggleResolution(resolution) {
+    if (Meteor.userId() !== resolution.user) {
+      throw new Meteor.Error("wrong-user");
+    }
 
-Meteor.publish("allResolutions", function() {
-  return Resolutions.find({});
+    Resolutions.update(resolution._id, {
+      $set: { complete: !resolution.complete }
+    });
+  },
+  deleteResolution(resolution) {
+    if (Meteor.userId() !== resolution.user) {
+      throw new Meteor.Error("wrong-user");
+    }
+
+    Resolutions.remove(resolution._id);
+  }
 });

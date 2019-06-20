@@ -11,9 +11,15 @@ export default class ResolutionForm extends React.Component {
 
     const ref = this.resolution.current;
 
-    Meteor.call("addResolution", ref.value.trim(), () => {
-      ref.value = "";
-    });
+    if (ref.value) {
+      Meteor.call("addResolution", ref.value.trim(), () => {
+        if (!Meteor.userId()) {
+          Bert.alert("Please login", "danger", "fixed-top");
+        } else {
+          ref.value = "";
+        }
+      });
+    }
   }
 
   render() {
